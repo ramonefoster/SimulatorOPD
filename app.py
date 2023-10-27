@@ -3,9 +3,10 @@ import sys
 import requests
 import validators
 import threading
+import time
 
 from PyQt5 import QtWidgets, uic
-from PyQt5.QtCore import QTimer, QUrl
+from PyQt5.QtCore import QTimer, QUrl, pyqtSlot
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import QMessageBox
 
@@ -15,6 +16,7 @@ from utils.coordinates import Coordinates
 from telescope import Telescope
 
 from utils.instances import verify_coord_format
+from utils.simbad import SimbadQ
 
 Ui_MainWindow, QtBaseClass = uic.loadUiType("main.ui")
 
@@ -43,6 +45,13 @@ class SimulatorOPD(QtWidgets.QMainWindow, Ui_MainWindow):
         self.btnEast.released.connect(self.telescope.stop_move_axis)
         self.btnWest.released.connect(self.telescope.stop_move_axis)
 
+        self.btnGetImage.released.connect(self.get_image)
+        self.btnSimbad.clicked.connect(self.from_simbad)
+
+        self.WebSimbad.loadStarted.connect(self.loadStartedHandler)
+        self.WebSimbad.loadProgress.connect(self.loadProgressHandler)
+        self.WebSimbad.loadFinished.connect(self.loadFinishedHandler)
+
         self.connect_telescope()
         self.load_telescope()
 
@@ -50,10 +59,29 @@ class SimulatorOPD(QtWidgets.QMainWindow, Ui_MainWindow):
         server_thread.daemon = True  # Set the thread as a daemon to stop it when the main thread exits
         server_thread.start()
     
+    @pyqtSlot()
+    def loadStartedHandler(self):
+        pass
+
+    @pyqtSlot(int)
+    def loadProgressHandler(self, prog):
+        self.progressBar.setValue(prog)
+
+    @pyqtSlot()
+    def loadFinishedHandler(self):
+        pass
+    
+    def from_simbad(self):
+        ra, dec = SimbadQ.get_radec((self.txtSimbadID.text()).upper())
+        self.txtTargetRA.setText(ra)
+        self.txtTargetDEC.setText(dec)
+    
     def update(self):
         if self.telescope.connected:
             self.telescope_status = self.telescope.get_position() 
-            self.update_telescope_position()  
+            self.update_telescope_position() 
+            if self.telescope_status["elevation"] <= 0:
+                self.stop()            
 
         self.telescope_stat_ui()
 
@@ -100,7 +128,15 @@ class SimulatorOPD(QtWidgets.QMainWindow, Ui_MainWindow):
         except Exception as e: 
             print("SERVER OFF: ", e)
     
-    def tracking(self):
+    def get_image(self):
+        if self.telescope.connected and self.telescope_status:
+            try:
+                url = QUrl(f'https://aladin.cds.unistra.fr/AladinLite/?target={(self.telescope_status["ra"]).replace(" ", "%20")}{(self.telescope_status["dec"].replace("+", "2B"))}&fov=1.20&survey=CDS%2FP%2FDSS2%2Fcolor')
+                self.WebSimbad.load(url)
+            except:
+                print("error")
+
+    def tracking(self):        
         """turn on or off sidereal movement"""
         if self.telescope_status:
             if self.telescope_status["tracking"]:

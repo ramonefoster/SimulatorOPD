@@ -36,7 +36,7 @@ function setup() {
   textSize(height / 45)
   textAlign(CENTER, CENTER)
 
-  color_slider = createSlider(31, 34, 32);
+  color_slider = createSlider(50, 150, 100);
   color_slider.position(10, 10)
   color_slider.style('width', multi_slider_size + 'px');
 

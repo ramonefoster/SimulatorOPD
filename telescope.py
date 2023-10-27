@@ -38,6 +38,8 @@ class Telescope():
             self.coord = {
                 "right ascension" : self._telescope.RightAscension,
                 "declination" : self._telescope.Declination,
+                "ra" : Convertion.hours_to_hms(self._telescope.RightAscension),
+                "dec" : Convertion.degrees_to_dms(self._telescope.Declination),
                 "sidereal" : self._telescope.SiderealTime,
                 "hour angle": ha,
                 "time limit" : Coordinates.get_observing_time(ha),

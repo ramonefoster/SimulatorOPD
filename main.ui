@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1000</width>
-    <height>740</height>
+    <width>1378</width>
+    <height>786</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -19,6 +19,10 @@
   <property name="windowTitle">
    <string>OPDSimulator</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>static/img/observatory_icon_149812.ico</normaloff>static/img/observatory_icon_149812.ico</iconset>
+  </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(13, 13, 13);</string>
   </property>
@@ -27,7 +31,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>10</y>
+      <y>0</y>
       <width>171</width>
       <height>321</height>
      </rect>
@@ -179,7 +183,7 @@ color: rgb(29, 28, 26);
       <string>Hour Angle</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="txtCoordTimeLimit">
+    <widget class="QLineEdit" name="txtCoordLST">
      <property name="geometry">
       <rect>
        <x>20</x>
@@ -211,56 +215,11 @@ color: rgb(29, 28, 26);
       <bool>true</bool>
      </property>
     </widget>
-    <widget class="QLabel" name="label_187">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>170</y>
-       <width>131</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Time to Limit</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="txtCoordLST">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>240</y>
-       <width>131</width>
-       <height>25</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Calibri Light</family>
-       <pointsize>11</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QLineEdit {
-background-color: lightgrey;
-border: 1px solid rgb(2,2,2);
-border-radius: 2px;
-color: rgb(29, 28, 26);
-}</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-     <property name="readOnly">
-      <bool>true</bool>
-     </property>
-    </widget>
     <widget class="QLabel" name="label_188">
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>220</y>
+       <y>170</y>
        <width>131</width>
        <height>16</height>
       </rect>
@@ -314,12 +273,57 @@ color: rgb(29, 28, 26);
       <bool>true</bool>
      </property>
     </widget>
+    <widget class="QLineEdit" name="txtCoordTimeLimit">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>240</y>
+       <width>131</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Calibri Light</family>
+       <pointsize>11</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit {
+background-color: lightgrey;
+border: 1px solid rgb(2,2,2);
+border-radius: 2px;
+color: rgb(29, 28, 26);
+}</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_187">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>220</y>
+       <width>131</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Time to Limit</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QGroupBox" name="groupBox_10">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>340</y>
+      <y>320</y>
       <width>171</width>
       <height>111</height>
      </rect>
@@ -474,8 +478,8 @@ color: rgb(29, 28, 26);
      <rect>
       <x>190</x>
       <y>10</y>
-      <width>800</width>
-      <height>670</height>
+      <width>681</width>
+      <height>721</height>
      </rect>
     </property>
     <property name="url">
@@ -488,9 +492,9 @@ color: rgb(29, 28, 26);
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>450</y>
+      <y>430</y>
       <width>171</width>
-      <height>151</height>
+      <height>131</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -499,48 +503,6 @@ color: rgb(29, 28, 26);
     <property name="title">
      <string>Target</string>
     </property>
-    <widget class="QLabel" name="label_9">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>100</y>
-       <width>111</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Observation Time</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="txtPointObsTime">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>120</y>
-       <width>131</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Calibri Light</family>
-       <pointsize>11</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QLineEdit {
-background-color: lightgrey;
-border: 1px solid rgb(2,2,2);
-border-radius: 2px;
-color: rgb(29, 28, 26);
-}</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
     <widget class="QLabel" name="label_11">
      <property name="geometry">
       <rect>
@@ -557,10 +519,10 @@ color: rgb(29, 28, 26);
     <widget class="QLineEdit" name="txtTargetDEC">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>80</y>
-       <width>131</width>
-       <height>20</height>
+       <x>10</x>
+       <y>90</y>
+       <width>150</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="font">
@@ -589,10 +551,10 @@ color: rgb(29, 28, 26);
     <widget class="QLineEdit" name="txtTargetRA">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>40</y>
-       <width>131</width>
-       <height>20</height>
+       <width>150</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="font">
@@ -622,7 +584,7 @@ color: rgb(29, 28, 26);
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>60</y>
+       <y>70</y>
        <width>81</width>
        <height>16</height>
       </rect>
@@ -636,7 +598,7 @@ color: rgb(29, 28, 26);
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>600</y>
+      <y>650</y>
       <width>171</width>
       <height>91</height>
      </rect>
@@ -755,7 +717,7 @@ color: rgb(29, 28, 26);
     <property name="geometry">
      <rect>
       <x>230</x>
-      <y>640</y>
+      <y>690</y>
       <width>30</width>
       <height>30</height>
      </rect>
@@ -781,7 +743,7 @@ color: rgb(29, 28, 26);
     <property name="geometry">
      <rect>
       <x>230</x>
-      <y>610</y>
+      <y>660</y>
       <width>31</width>
       <height>31</height>
      </rect>
@@ -803,7 +765,7 @@ color: rgb(29, 28, 26);
     <property name="geometry">
      <rect>
       <x>200</x>
-      <y>610</y>
+      <y>660</y>
       <width>30</width>
       <height>30</height>
      </rect>
@@ -829,7 +791,7 @@ color: rgb(29, 28, 26);
     <property name="geometry">
      <rect>
       <x>260</x>
-      <y>610</y>
+      <y>660</y>
       <width>30</width>
       <height>30</height>
      </rect>
@@ -855,7 +817,7 @@ color: rgb(29, 28, 26);
     <property name="geometry">
      <rect>
       <x>230</x>
-      <y>580</y>
+      <y>630</y>
       <width>30</width>
       <height>30</height>
      </rect>
@@ -897,13 +859,133 @@ color: rgb(29, 28, 26);
      <bool>true</bool>
     </property>
    </widget>
+   <widget class="QWebEngineView" name="WebSimbad">
+    <property name="geometry">
+     <rect>
+      <x>880</x>
+      <y>10</y>
+      <width>471</width>
+      <height>491</height>
+     </rect>
+    </property>
+    <property name="url">
+     <url>
+      <string>about:blank</string>
+     </url>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnGetImage">
+    <property name="geometry">
+     <rect>
+      <x>880</x>
+      <y>510</y>
+      <width>111</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(68, 68, 68);</string>
+    </property>
+    <property name="text">
+     <string>Get Image</string>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_4">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>560</y>
+      <width>171</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(238, 238, 238);</string>
+    </property>
+    <property name="title">
+     <string>Search</string>
+    </property>
+    <widget class="QLineEdit" name="txtSimbadID">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>151</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Calibri Light</family>
+       <pointsize>11</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit {
+background-color: lightgrey;
+border: 1px solid rgb(2,2,2);
+border-radius: 2px;
+color: rgb(29, 28, 26);
+}</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="placeholderText">
+      <string>ex: M31</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnSimbad">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>50</y>
+       <width>131</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(68, 68, 68);</string>
+     </property>
+     <property name="text">
+      <string>Search SIMBAD</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QProgressBar" name="progressBar">
+    <property name="geometry">
+     <rect>
+      <x>1000</x>
+      <y>510</y>
+      <width>351</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="value">
+     <number>0</number>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1000</width>
+     <width>1378</width>
      <height>21</height>
     </rect>
    </property>
