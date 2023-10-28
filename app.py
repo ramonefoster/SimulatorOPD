@@ -129,9 +129,10 @@ class SimulatorOPD(QtWidgets.QMainWindow, Ui_MainWindow):
             print("SERVER OFF: ", e)
     
     def get_image(self):
+        print(f'{(self.telescope_status["ra"]).replace(" ", "%20")}{(self.telescope_status["dec"].replace("+", "2B"))}')
         if self.telescope.connected and self.telescope_status:
             try:
-                url = QUrl(f'https://aladin.cds.unistra.fr/AladinLite/?target={(self.telescope_status["ra"]).replace(" ", "%20")}{(self.telescope_status["dec"].replace("+", "2B"))}&fov=1.20&survey=CDS%2FP%2FDSS2%2Fcolor')
+                url = QUrl(f'https://aladin.cds.unistra.fr/AladinLite/?target={(self.telescope_status["ra"]).replace(" ", "%20")}{(self.telescope_status["dec"].replace("+", "%2B"))}&fov=1.20&survey=CDS%2FP%2FDSS2%2Fcolor')
                 self.WebSimbad.load(url)
             except:
                 print("error")
