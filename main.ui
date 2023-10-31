@@ -6,13 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1378</width>
-    <height>786</height>
+    <width>1370</width>
+    <height>740</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>1000</width>
+    <width>1370</width>
+    <height>740</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1370</width>
     <height>740</height>
    </size>
   </property>
@@ -31,13 +37,14 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>0</y>
+      <y>10</y>
       <width>171</width>
-      <height>321</height>
+      <height>371</height>
      </rect>
     </property>
     <property name="font">
      <font>
+      <pointsize>11</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
@@ -54,8 +61,13 @@
        <x>20</x>
        <y>20</y>
        <width>131</width>
-       <height>16</height>
+       <height>21</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+      </font>
      </property>
      <property name="text">
       <string>Right Ascension</string>
@@ -99,8 +111,13 @@ color: rgb(29, 28, 26);
        <x>20</x>
        <y>70</y>
        <width>131</width>
-       <height>16</height>
+       <height>21</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+      </font>
      </property>
      <property name="text">
       <string>Declination</string>
@@ -176,8 +193,13 @@ color: rgb(29, 28, 26);
        <x>20</x>
        <y>120</y>
        <width>131</width>
-       <height>16</height>
+       <height>21</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+      </font>
      </property>
      <property name="text">
       <string>Hour Angle</string>
@@ -221,8 +243,13 @@ color: rgb(29, 28, 26);
        <x>20</x>
        <y>170</y>
        <width>131</width>
-       <height>16</height>
+       <height>21</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+      </font>
      </property>
      <property name="text">
       <string>Sidereal Time</string>
@@ -232,10 +259,15 @@ color: rgb(29, 28, 26);
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>270</y>
-       <width>61</width>
-       <height>16</height>
+       <y>320</y>
+       <width>131</width>
+       <height>21</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+      </font>
      </property>
      <property name="text">
       <string>Elevation</string>
@@ -245,7 +277,7 @@ color: rgb(29, 28, 26);
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>290</y>
+       <y>340</y>
        <width>131</width>
        <height>25</height>
       </rect>
@@ -311,25 +343,81 @@ color: rgb(29, 28, 26);
        <x>20</x>
        <y>220</y>
        <width>131</width>
-       <height>16</height>
+       <height>21</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+      </font>
      </property>
      <property name="text">
       <string>Time to Limit</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_6">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>270</y>
+       <width>131</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Azimuth</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="txtCoordAzimuth">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>290</y>
+       <width>131</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Calibri Light</family>
+       <pointsize>11</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit {
+background-color: lightgrey;
+border: 1px solid rgb(2,2,2);
+border-radius: 2px;
+color: rgb(29, 28, 26);
+}</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
      </property>
     </widget>
    </widget>
    <widget class="QGroupBox" name="groupBox_10">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>320</y>
+      <x>1140</x>
+      <y>560</y>
       <width>171</width>
-      <height>111</height>
+      <height>171</height>
      </rect>
     </property>
     <property name="font">
      <font>
+      <pointsize>11</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
@@ -338,16 +426,23 @@ color: rgb(29, 28, 26);
      <string notr="true">color: rgb(238, 238, 238);</string>
     </property>
     <property name="title">
-     <string>Telescope</string>
+     <string>Status</string>
     </property>
     <widget class="QLabel" name="label_23">
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>20</y>
+       <y>33</y>
        <width>101</width>
-       <height>16</height>
+       <height>21</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
      </property>
      <property name="text">
       <string>Connected</string>
@@ -357,10 +452,17 @@ color: rgb(29, 28, 26);
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>50</y>
+       <y>83</y>
        <width>101</width>
-       <height>16</height>
+       <height>21</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
      </property>
      <property name="text">
       <string>Slewing</string>
@@ -370,10 +472,17 @@ color: rgb(29, 28, 26);
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>80</y>
+       <y>133</y>
        <width>101</width>
-       <height>16</height>
+       <height>21</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
      </property>
      <property name="text">
       <string>Tracking</string>
@@ -383,9 +492,9 @@ color: rgb(29, 28, 26);
      <property name="geometry">
       <rect>
        <x>130</x>
-       <y>20</y>
-       <width>31</width>
-       <height>16</height>
+       <y>30</y>
+       <width>30</width>
+       <height>30</height>
       </rect>
      </property>
      <property name="whatsThis">
@@ -395,7 +504,8 @@ color: rgb(29, 28, 26);
       <bool>false</bool>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: indianred</string>
+      <string notr="true">background-color: indianred;
+border-radius: 15px;</string>
      </property>
      <property name="frameShape">
       <enum>QFrame::Box</enum>
@@ -414,9 +524,9 @@ color: rgb(29, 28, 26);
      <property name="geometry">
       <rect>
        <x>130</x>
-       <y>50</y>
-       <width>31</width>
-       <height>16</height>
+       <y>80</y>
+       <width>30</width>
+       <height>30</height>
       </rect>
      </property>
      <property name="whatsThis">
@@ -426,7 +536,8 @@ color: rgb(29, 28, 26);
       <bool>false</bool>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: indianred</string>
+      <string notr="true">background-color: indianred;
+border-radius: 15px;</string>
      </property>
      <property name="frameShape">
       <enum>QFrame::Box</enum>
@@ -445,9 +556,9 @@ color: rgb(29, 28, 26);
      <property name="geometry">
       <rect>
        <x>130</x>
-       <y>80</y>
-       <width>31</width>
-       <height>16</height>
+       <y>130</y>
+       <width>30</width>
+       <height>30</height>
       </rect>
      </property>
      <property name="whatsThis">
@@ -457,7 +568,8 @@ color: rgb(29, 28, 26);
       <bool>false</bool>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: indianred</string>
+      <string notr="true">background-color: indianred;
+border-radius: 15px;</string>
      </property>
      <property name="frameShape">
       <enum>QFrame::Box</enum>
@@ -492,10 +604,17 @@ color: rgb(29, 28, 26);
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>430</y>
+      <y>390</y>
       <width>171</width>
       <height>131</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
     </property>
     <property name="styleSheet">
      <string notr="true">color: rgb(238, 238, 238);</string>
@@ -508,9 +627,14 @@ color: rgb(29, 28, 26);
       <rect>
        <x>20</x>
        <y>20</y>
-       <width>121</width>
-       <height>16</height>
+       <width>131</width>
+       <height>21</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+      </font>
      </property>
      <property name="text">
       <string>Right Ascension</string>
@@ -585,9 +709,14 @@ color: rgb(29, 28, 26);
       <rect>
        <x>20</x>
        <y>70</y>
-       <width>81</width>
-       <height>16</height>
+       <width>131</width>
+       <height>21</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+      </font>
      </property>
      <property name="text">
       <string>Declination</string>
@@ -598,10 +727,17 @@ color: rgb(29, 28, 26);
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>650</y>
+      <y>630</y>
       <width>171</width>
-      <height>91</height>
+      <height>101</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
     </property>
     <property name="styleSheet">
      <string notr="true">color: rgb(238, 238, 238);</string>
@@ -613,7 +749,7 @@ color: rgb(29, 28, 26);
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>50</y>
+       <y>60</y>
        <width>71</width>
        <height>31</height>
       </rect>
@@ -625,7 +761,8 @@ color: rgb(29, 28, 26);
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: indianred</string>
+      <string notr="true">background-color: indianred;
+color: black;</string>
      </property>
      <property name="text">
       <string>ABORT</string>
@@ -639,7 +776,7 @@ color: rgb(29, 28, 26);
      <property name="geometry">
       <rect>
        <x>90</x>
-       <y>50</y>
+       <y>60</y>
        <width>71</width>
        <height>31</height>
       </rect>
@@ -651,7 +788,8 @@ color: rgb(29, 28, 26);
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: lightgreen</string>
+      <string notr="true">background-color: lightgreen;
+color: black;</string>
      </property>
      <property name="text">
       <string>POINT</string>
@@ -671,14 +809,14 @@ color: rgb(29, 28, 26);
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>20</y>
-       <width>71</width>
-       <height>20</height>
+       <y>30</y>
+       <width>81</width>
+       <height>21</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <pointsize>9</pointsize>
+       <pointsize>11</pointsize>
        <weight>75</weight>
        <bold>true</bold>
       </font>
@@ -691,7 +829,7 @@ color: rgb(29, 28, 26);
      <property name="geometry">
       <rect>
        <x>100</x>
-       <y>20</y>
+       <y>30</y>
        <width>51</width>
        <height>21</height>
       </rect>
@@ -706,7 +844,8 @@ color: rgb(29, 28, 26);
       <string>Turn tracking ON/OFF</string>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: indianred</string>
+      <string notr="true">background-color: indianred;
+color: black;</string>
      </property>
      <property name="text">
       <string>OFF</string>
@@ -716,15 +855,16 @@ color: rgb(29, 28, 26);
    <widget class="QPushButton" name="btnSouth">
     <property name="geometry">
      <rect>
-      <x>230</x>
-      <y>690</y>
-      <width>30</width>
-      <height>30</height>
+      <x>980</x>
+      <y>670</y>
+      <width>50</width>
+      <height>50</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>12</pointsize>
+      <family>Reem Kufi</family>
+      <pointsize>16</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
@@ -742,14 +882,14 @@ color: rgb(29, 28, 26);
    <widget class="QLabel" name="label_18">
     <property name="geometry">
      <rect>
-      <x>230</x>
-      <y>660</y>
-      <width>31</width>
-      <height>31</height>
+      <x>980</x>
+      <y>620</y>
+      <width>50</width>
+      <height>50</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 255, 255);</string>
+     <string notr="true">background-color: rgb(100, 100, 100);</string>
     </property>
     <property name="text">
      <string/>
@@ -764,15 +904,16 @@ color: rgb(29, 28, 26);
    <widget class="QPushButton" name="btnWest">
     <property name="geometry">
      <rect>
-      <x>200</x>
-      <y>660</y>
-      <width>30</width>
-      <height>30</height>
+      <x>930</x>
+      <y>620</y>
+      <width>50</width>
+      <height>50</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>12</pointsize>
+      <family>Reem Kufi</family>
+      <pointsize>16</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
@@ -790,15 +931,16 @@ color: rgb(29, 28, 26);
    <widget class="QPushButton" name="btnEast">
     <property name="geometry">
      <rect>
-      <x>260</x>
-      <y>660</y>
-      <width>30</width>
-      <height>30</height>
+      <x>1030</x>
+      <y>620</y>
+      <width>50</width>
+      <height>50</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>12</pointsize>
+      <family>Reem Kufi</family>
+      <pointsize>16</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
@@ -816,15 +958,16 @@ color: rgb(29, 28, 26);
    <widget class="QPushButton" name="btnNorth">
     <property name="geometry">
      <rect>
-      <x>230</x>
-      <y>630</y>
-      <width>30</width>
-      <height>30</height>
+      <x>980</x>
+      <y>570</y>
+      <width>50</width>
+      <height>50</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>12</pointsize>
+      <family>Reem Kufi</family>
+      <pointsize>16</pointsize>
       <weight>75</weight>
       <bold>true</bold>
       <strikeout>false</strikeout>
@@ -844,7 +987,7 @@ color: rgb(29, 28, 26);
     <property name="geometry">
      <rect>
       <x>200</x>
-      <y>50</y>
+      <y>20</y>
       <width>101</width>
       <height>181</height>
      </rect>
@@ -902,10 +1045,17 @@ background-color: rgb(68, 68, 68);</string>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>560</y>
+      <y>530</y>
       <width>171</width>
       <height>91</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
     </property>
     <property name="styleSheet">
      <string notr="true">color: rgb(238, 238, 238);</string>
@@ -954,12 +1104,23 @@ color: rgb(29, 28, 26);
        <height>31</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
      <property name="styleSheet">
       <string notr="true">color: rgb(255, 255, 255);
 background-color: rgb(68, 68, 68);</string>
      </property>
      <property name="text">
-      <string>Search SIMBAD</string>
+      <string>SIMBAD</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>static/img/lupa.ico</normaloff>static/img/lupa.ico</iconset>
      </property>
     </widget>
    </widget>
@@ -980,17 +1141,6 @@ background-color: rgb(68, 68, 68);</string>
     </property>
    </widget>
   </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1378</width>
-     <height>21</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <customwidgets>
   <customwidget>

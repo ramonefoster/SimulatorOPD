@@ -26,7 +26,7 @@ function preload() {
   tubo = loadModel("static/assets/Tubo_PE160.obj", false)
   inconsolata = loadFont('static/assets/inconsolata.otf')
   // data = loadJSON('static/assets/data.json')
-  setInterval(getJSONData, 500)
+  setInterval(getJSONData, 150)
 }
 
 
@@ -37,7 +37,7 @@ function setup() {
   textAlign(CENTER, CENTER)
 
   color_slider = createSlider(50, 150, 100);
-  color_slider.position(10, 10)
+  color_slider.position(10, 680)
   color_slider.style('width', multi_slider_size + 'px');
 
 }

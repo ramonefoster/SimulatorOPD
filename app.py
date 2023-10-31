@@ -80,36 +80,37 @@ class SimulatorOPD(QtWidgets.QMainWindow, Ui_MainWindow):
         if self.telescope.connected:
             self.telescope_status = self.telescope.get_position() 
             self.update_telescope_position() 
-            if self.telescope_status["elevation"] <= 0:
+            if self.telescope_status["elevation"] <= 0 and self.telescope_status["tracking"]:
                 self.stop()            
 
         self.telescope_stat_ui()
 
     def telescope_stat_ui(self):
         if self.telescope.connected:
-            self.statTeleConn.setStyleSheet("background-color: lightgreen")
+            self.statTeleConn.setStyleSheet("background-color: lightgreen;\nborder-radius: 15px;")
         else:
-            self.statTeleConn.setStyleSheet("background-color: indianred")
+            self.statTeleConn.setStyleSheet("background-color: indianred;\nborder-radius: 15px;")
         self.txtCoordRA.setText(Convertion.hours_to_hms(self.telescope_status["right ascension"], decimal_digits=2))
         self.txtCoordDEC.setText(Convertion.degrees_to_dms(self.telescope_status["declination"]))
         self.txtCoordLST.setText(Convertion.hours_to_hms(self.telescope_status["sidereal"], decimal_digits=2))
         self.txtCoordTimeLimit.setText(Convertion.hours_to_hms(self.telescope_status["time limit"]))
         self.txtCoordElevation.setText(str(round(self.telescope_status["elevation"], 2)))
+        self.txtCoordAzimuth.setText(str(round(self.telescope_status["azimuth"], 2)))
         self.txtCoordHA.setText(Convertion.hours_to_hms(self.telescope_status["hour angle"], decimal_digits=2))
 
         if self.telescope_status["slewing"]:
-            self.statTeleSlew.setStyleSheet("background-color: lightgreen")
+            self.statTeleSlew.setStyleSheet("background-color: lightgreen;\nborder-radius: 15px;")
         else:
-            self.statTeleSlew.setStyleSheet("background-color: indianred")
+            self.statTeleSlew.setStyleSheet("background-color: indianred;\nborder-radius: 15px;")
 
         if self.telescope_status["tracking"]:       
-            self.statTeleTrack.setStyleSheet("background-color: lightgreen")
+            self.statTeleTrack.setStyleSheet("background-color: lightgreen;\nborder-radius: 15px;")
             self.btnTracking.setText("ON")
-            self.btnTracking.setStyleSheet("background-color: lightgreen")
+            self.btnTracking.setStyleSheet("background-color: lightgreen;\nborder-radius: 15px;")
         else:
-            self.statTeleTrack.setStyleSheet("background-color: indianred")
+            self.statTeleTrack.setStyleSheet("background-color: indianred;\nborder-radius: 15px;")
             self.btnTracking.setText("OFF")
-            self.btnTracking.setStyleSheet("background-color: indianred")           
+            self.btnTracking.setStyleSheet("background-color: indianred;\nborder-radius: 15px;")           
     
     def load_telescope(self):
         """load outlet page"""
@@ -160,10 +161,6 @@ class SimulatorOPD(QtWidgets.QMainWindow, Ui_MainWindow):
         if validators.url(url):
             try:
                 response = requests.post(f"{url.rstrip('/')}:5000/api/telescope/position", json=data)
-                if response.status_code == 200:
-                    print("Telescope position updated successfully.")
-                else:
-                    print("Failed to update telescope position.")
             except Exception as e:
                 print(e)
     
@@ -198,7 +195,7 @@ class SimulatorOPD(QtWidgets.QMainWindow, Ui_MainWindow):
         self._abort.clear()
         
         if not verify_coord_format(self.txtTargetRA.text()) or not verify_coord_format(self.txtTargetDEC.text()):
-            self.showDialog("RA and DEC invalids.")
+            self.showDialog("RA e/ou DEC inválidos.")
         elif self.telescope.connected:            
             ra = Convertion.hms_to_hours(self.txtTargetRA.text())
             dec = Convertion.dms_to_degrees(self.txtTargetDEC.text()) 
@@ -212,13 +209,13 @@ class SimulatorOPD(QtWidgets.QMainWindow, Ui_MainWindow):
                     self.telescope.set_track(True)
                     self.telescope.slew_async(ra, dec)
                 else:
-                    self.showDialog("Object is not above horizon.")
+                    self.showDialog("Objeto abaixo da linha do horizonte.")
             except Exception as e:
                 print("Error poiting: " +str(e))
                 self.statTeleSlew.setStyleSheet("background-color: indianred")
     
     def timer_status(self):
-        self.timer.start(500)
+        self.timer.start(150)
 
     def showDialog(self, msgError):
         """
@@ -245,7 +242,7 @@ class SimulatorOPD(QtWidgets.QMainWindow, Ui_MainWindow):
             event (QCloseEvent): The close event triggered when the application is closed.
         """
         close = QMessageBox()
-        close.setText("Are you sure?")
+        close.setText("Tem certeza que deseja sair?")
         close.setStandardButtons(QMessageBox.Yes | QMessageBox.Cancel)
         close = close.exec()
 

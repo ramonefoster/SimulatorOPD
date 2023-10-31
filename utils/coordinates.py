@@ -88,12 +88,12 @@ class Coordinates():
             return "W"
     
     @staticmethod
-    def calc_twilight(latitude, longitude, altitude, bar, temperature):
+    def calc_twilight(latitude, longitude, altitude):
         """Calculates sun altitude, sunset and sunrise
         also calculates moon light %. This is useful when 
         using scripts, and prevent poiting when sun is up"""
         try:
-            OPD = Coordinates.get_ephem(latitude, longitude, altitude, bar, temperature)
+            OPD = Coordinates.get_ephem(latitude, longitude, altitude)
             sun = ephem.Sun(OPD)
             moon = ephem.Moon(OPD)
             moon_phase = moon.moon_phase 
@@ -106,7 +106,7 @@ class Coordinates():
         
     
     @staticmethod
-    def get_ephem(latitude, longitude, altitude, bar, temperature):
+    def get_ephem(latitude, longitude, altitude):
         OPD=ephem.Observer()
         if not is_numeric(latitude):
             latitude = Convertion.dms_to_degrees(latitude)
@@ -114,9 +114,7 @@ class Coordinates():
             longitude = Convertion.dms_to_degrees(longitude)
         try:
             OPD.lat=str(Convertion.dms_to_degrees(latitude))
-            OPD.lon=str(Convertion.dms_to_degrees(longitude))
-            OPD.pressure = float(bar) # millibar
-            OPD.temp = float(temperature) # deg. Celcius
+            OPD.lon=str(Convertion.dms_to_degrees(longitude))            
             OPD.date = datetime.datetime.utcnow()
             if is_numeric(altitude):                
                 OPD.elevation = altitude # meters
