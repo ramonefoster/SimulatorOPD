@@ -45,6 +45,8 @@ class SimulatorOPD(QtWidgets.QMainWindow, Ui_MainWindow):
         self.btnEast.released.connect(self.telescope.stop_move_axis)
         self.btnWest.released.connect(self.telescope.stop_move_axis)
 
+        self.comboBox.currentIndexChanged.connect(self.change_telescope)
+
         self.btnGetImage.released.connect(self.get_image)
         self.btnSimbad.clicked.connect(self.from_simbad)
 
@@ -53,11 +55,24 @@ class SimulatorOPD(QtWidgets.QMainWindow, Ui_MainWindow):
         self.WebSimbad.loadFinished.connect(self.loadFinishedHandler)
 
         self.connect_telescope()
-        self.load_telescope()
+        self.change_telescope()
 
         server_thread = threading.Thread(target=self.start_server)
         server_thread.daemon = True  # Set the thread as a daemon to stop it when the main thread exits
         server_thread.start()
+    
+    def change_telescope(self):
+        """load outlet page"""
+        if self.comboBox.currentIndex() == 0:
+            url = QUrl("http://127.0.0.1:5500/")
+        else:
+            url = QUrl("http://127.0.0.1:5500/iag")
+
+        if url.isValid():
+            try:
+                self.web160.load(url)
+            except Exception as e:
+                print(e)
     
     @pyqtSlot()
     def loadStartedHandler(self):
@@ -111,16 +126,6 @@ class SimulatorOPD(QtWidgets.QMainWindow, Ui_MainWindow):
             self.statTeleTrack.setStyleSheet("background-color: indianred;\nborder-radius: 15px;")
             self.btnTracking.setText("OFF")
             self.btnTracking.setStyleSheet("background-color: indianred;\nborder-radius: 15px;")           
-    
-    def load_telescope(self):
-        """load outlet page"""
-        url = QUrl("http://127.0.0.1:5500/")
-
-        if url.isValid():
-            try:
-                self.webTomadas.load(url)
-            except Exception as e:
-                print(e) 
     
     def start_server(self):
         try:
