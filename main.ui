@@ -76,9 +76,9 @@
     <widget class="QLineEdit" name="txtCoordRA">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>40</y>
-       <width>131</width>
+       <width>150</width>
        <height>25</height>
       </rect>
      </property>
@@ -126,9 +126,9 @@ color: rgb(29, 28, 26);
     <widget class="QLineEdit" name="txtCoordDEC">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>90</y>
-       <width>131</width>
+       <width>150</width>
        <height>25</height>
       </rect>
      </property>
@@ -158,9 +158,9 @@ color: rgb(29, 28, 26);
     <widget class="QLineEdit" name="txtCoordHA">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>140</y>
-       <width>131</width>
+       <width>150</width>
        <height>25</height>
       </rect>
      </property>
@@ -208,9 +208,9 @@ color: rgb(29, 28, 26);
     <widget class="QLineEdit" name="txtCoordLST">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>190</y>
-       <width>131</width>
+       <width>150</width>
        <height>25</height>
       </rect>
      </property>
@@ -276,9 +276,9 @@ color: rgb(29, 28, 26);
     <widget class="QLineEdit" name="txtCoordElevation">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>340</y>
-       <width>131</width>
+       <width>150</width>
        <height>25</height>
       </rect>
      </property>
@@ -308,9 +308,9 @@ color: rgb(29, 28, 26);
     <widget class="QLineEdit" name="txtCoordTimeLimit">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>240</y>
-       <width>131</width>
+       <width>150</width>
        <height>25</height>
       </rect>
      </property>
@@ -376,9 +376,9 @@ color: rgb(29, 28, 26);
     <widget class="QLineEdit" name="txtCoordAzimuth">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>290</y>
-       <width>131</width>
+       <width>150</width>
        <height>25</height>
       </rect>
      </property>
@@ -409,7 +409,7 @@ color: rgb(29, 28, 26);
    <widget class="QGroupBox" name="groupBox_10">
     <property name="geometry">
      <rect>
-      <x>1140</x>
+      <x>1130</x>
       <y>560</y>
       <width>171</width>
       <height>171</height>
@@ -1007,8 +1007,8 @@ color: black;</string>
      <rect>
       <x>880</x>
       <y>10</y>
-      <width>471</width>
-      <height>491</height>
+      <width>480</width>
+      <height>480</height>
      </rect>
     </property>
     <property name="url" stdset="0">
@@ -1163,6 +1163,95 @@ background-color: rgb(68, 68, 68);</string>
      </property>
     </item>
    </widget>
+   <widget class="QGroupBox" name="groupBox_2">
+    <property name="geometry">
+     <rect>
+      <x>720</x>
+      <y>610</y>
+      <width>141</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgba(255, 255, 255, 0);</string>
+    </property>
+    <property name="title">
+     <string>Random</string>
+    </property>
+    <widget class="QPushButton" name="btnRandom">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>30</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: lightgrey;
+color: black;</string>
+     </property>
+     <property name="text">
+      <string>Start</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../BlackStar/src/assets/icons/target.png</normaloff>../BlackStar/src/assets/icons/target.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>18</width>
+       <height>18</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QLabel" name="statRandom">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>30</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="whatsThis">
+      <string/>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: indianred;
+border-radius: 15px;</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Box</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Sunken</enum>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </widget>
    <zorder>groupBox</zorder>
    <zorder>groupBox_10</zorder>
    <zorder>web160</zorder>
@@ -1179,6 +1268,7 @@ background-color: rgb(68, 68, 68);</string>
    <zorder>progressBar</zorder>
    <zorder>label_20</zorder>
    <zorder>comboBox</zorder>
+   <zorder>groupBox_2</zorder>
   </widget>
  </widget>
  <customwidgets>

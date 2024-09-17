@@ -36,6 +36,7 @@ class Telescope():
         if self.connected:
             ha = Convertion.ra_to_ah(self._telescope.RightAscension, self._telescope.SiderealTime)
             self.coord = {
+                "connected": self._telescope.Connected,
                 "right ascension" : self._telescope.RightAscension,
                 "declination" : self._telescope.Declination,
                 "ra" : Convertion.hours_to_hms(self._telescope.RightAscension),

@@ -4,8 +4,9 @@ import requests
 import validators
 import threading
 import time
+import random
 
-from PyQt5 import QtWidgets, uic
+from PyQt5 import QtWidgets, uic, QtTest
 from PyQt5.QtCore import QTimer, QUrl, pyqtSlot
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import QMessageBox
@@ -17,6 +18,9 @@ from telescope import Telescope
 
 from utils.instances import verify_coord_format
 from utils.simbad import SimbadQ
+
+from utils.dso import DSO
+from ipyaladin import Aladin
 
 Ui_MainWindow, QtBaseClass = uic.loadUiType("main.ui")
 
@@ -32,6 +36,8 @@ class SimulatorOPD(QtWidgets.QMainWindow, Ui_MainWindow):
 
         self.telescope = Telescope()
         self.telescope_status = {}
+        self.thread_telescope = None
+        self._disconnect_flag = False
 
         self.btnPoint.clicked.connect(self.slew)
         self.btnTracking.clicked.connect(self.tracking)
@@ -45,6 +51,8 @@ class SimulatorOPD(QtWidgets.QMainWindow, Ui_MainWindow):
         self.btnEast.released.connect(self.telescope.stop_move_axis)
         self.btnWest.released.connect(self.telescope.stop_move_axis)
 
+        self.btnRandom.clicked.connect(self.start_random)
+
         self.comboBox.currentIndexChanged.connect(self.change_telescope)
 
         self.btnGetImage.released.connect(self.get_image)
@@ -54,6 +62,9 @@ class SimulatorOPD(QtWidgets.QMainWindow, Ui_MainWindow):
         self.WebSimbad.loadProgress.connect(self.loadProgressHandler)
         self.WebSimbad.loadFinished.connect(self.loadFinishedHandler)
 
+        self.random = False
+        self.dsos = DSO
+
         self.connect_telescope()
         self.change_telescope()
 
@@ -61,6 +72,18 @@ class SimulatorOPD(QtWidgets.QMainWindow, Ui_MainWindow):
         server_thread.daemon = True  # Set the thread as a daemon to stop it when the main thread exits
         server_thread.start()
     
+    def start_random(self):  
+        self.random = not self.random
+
+        if self.random:
+            self.statRandom.setStyleSheet("background-color: lightgreen;\nborder-radius: 15px;")
+            self.btnRandom.setText("STOP")
+            self.random_obj()
+        else:
+            self.statRandom.setStyleSheet("background-color: indianred;\nborder-radius: 15px;")
+            self.btnRandom.setText("START")       
+        
+
     def change_telescope(self):
         """load outlet page"""
         if self.comboBox.currentIndex() == 0:
@@ -86,22 +109,62 @@ class SimulatorOPD(QtWidgets.QMainWindow, Ui_MainWindow):
     def loadFinishedHandler(self):
         pass
     
-    def from_simbad(self):
-        ra, dec = SimbadQ.get_radec((self.txtSimbadID.text()).upper())
+    def from_simbad(self, id = None):
+        if id:
+            ra, dec = SimbadQ.get_radec((id))
+        else:
+            ra, dec = SimbadQ.get_radec((self.txtSimbadID.text()).upper())
         self.txtTargetRA.setText(ra)
         self.txtTargetDEC.setText(dec)
+
+        return ra, dec
     
+    def random_obj(self):
+        latitude = "-22 32 04"
+        if len(self.dsos)<5:
+            self.dsos = DSO
+
+        id = random.randint(1, len(self.dsos)-1)
+
+        alt = 0
+        while alt < 20:
+            id = random.randint(1, len(self.dsos)-1)
+            obj = self.dsos[id]
+            ra, dec = self.from_simbad(id=obj)
+            if not ra or not dec:
+                continue
+            sidereal = self.telescope_status["sidereal"]           
+            ha = Convertion.ra_to_ah(ra, sidereal)
+            alt, az = Coordinates.get_elevation_azimuth(ha, dec, latitude)
+        
+        self.dsos.pop(id)
+        self.txtSimbadID.setText(obj)
+        self.slew()
+        QtTest.QTest.qWait(1500)
+        while self.telescope_status["slewing"]:
+            QtTest.QTest.qWait(500)
+        self.get_image(Convertion.hours_to_hms(ra), Convertion.degrees_to_dms(dec))
+
     def update(self):
-        if self.telescope.connected:
-            self.telescope_status = self.telescope.get_position() 
-            self.update_telescope_position() 
+        if int(time.time() % 60) == 0:
+            if self.random:
+                self.statRandom.setStyleSheet("background-color: lightgreen;\nborder-radius: 15px;")
+                self.btnRandom.setText("STOP")
+                if self.telescope_status["slewing"]:
+                    self.stop()
+                self.random_obj()
+            else:
+                self.statRandom.setStyleSheet("background-color: indianred;\nborder-radius: 15px;")
+                self.btnRandom.setText("START")
+
+        if self.telescope_status.get("connected"):
             if self.telescope_status["elevation"] <= 0 and self.telescope_status["tracking"]:
                 self.stop()            
 
-        self.telescope_stat_ui()
+            self.telescope_stat_ui()
 
     def telescope_stat_ui(self):
-        if self.telescope.connected:
+        if self.telescope_status.get("connected"):
             self.statTeleConn.setStyleSheet("background-color: lightgreen;\nborder-radius: 15px;")
         else:
             self.statTeleConn.setStyleSheet("background-color: indianred;\nborder-radius: 15px;")
@@ -134,11 +197,14 @@ class SimulatorOPD(QtWidgets.QMainWindow, Ui_MainWindow):
         except Exception as e: 
             print("SERVER OFF: ", e)
     
-    def get_image(self):
-        print(f'{(self.telescope_status["ra"]).replace(" ", "%20")}{(self.telescope_status["dec"].replace("+", "2B"))}')
-        if self.telescope.connected and self.telescope_status:
+    def get_image(self, ra=None, dec=None):
+        if not ra or not dec:
+            ra = (self.telescope_status["ra"]).replace(" ", "%20")
+            dec = (self.telescope_status["dec"].replace("+", "%2B"))
+
+        if self.telescope_status.get("connected") and self.telescope_status:
             try:
-                url = QUrl(f'https://aladin.cds.unistra.fr/AladinLite/?target={(self.telescope_status["ra"]).replace(" ", "%20")}{(self.telescope_status["dec"].replace("+", "%2B"))}&fov=1.20&survey=CDS%2FP%2FDSS2%2Fcolor')
+                url = QUrl(f'https://aladin.cds.unistra.fr/AladinLite/?target={ra.replace(" ", "%20")}{(dec.replace("+", "%2B"))}&fov=0.50&survey=CDS%2FP%2FDSS2%2Fcolor')
                 self.WebSimbad.load(url)
             except:
                 print("error")
@@ -179,29 +245,27 @@ class SimulatorOPD(QtWidgets.QMainWindow, Ui_MainWindow):
                 print(e)
 
     def stop(self):
+        self.random = False
         self.btnAbort.setEnabled(False)
         QTimer.singleShot(3000, lambda: self.btnAbort.setDisabled(False))
         """stops any movement (dome and telescope)"""
         self._abort.set()  
-        if self.telescope.connected:            
+        if self.telescope_status.get("connected"):            
             self.telescope.abort_slew()
             if self.telescope_status["tracking"]:
                 self.telescope.set_track(False)
-    
-    def connect_telescope(self):
-        self.telescope.connect()
-    
+        
     def slew(self):
         """Points the telescope to a given Target"""
         self.btnPoint.setEnabled(False)
-        QTimer.singleShot(3000, lambda: self.btnPoint.setDisabled(False)) 
+        QTimer.singleShot(1000, lambda: self.btnPoint.setDisabled(False)) 
         
-        self.statTeleSlew.setStyleSheet("background-color: lightgreen") 
+        self.statTeleSlew.setStyleSheet("background-color: lightgreen;\nborder-radius: 15px;")
         self._abort.clear()
         
         if not verify_coord_format(self.txtTargetRA.text()) or not verify_coord_format(self.txtTargetDEC.text()):
             self.showDialog("RA e/ou DEC inválidos.")
-        elif self.telescope.connected:            
+        elif self.telescope_status.get("connected"):            
             ra = Convertion.hms_to_hours(self.txtTargetRA.text())
             dec = Convertion.dms_to_degrees(self.txtTargetDEC.text()) 
             sidereal = self.telescope_status["sidereal"]           
@@ -234,6 +298,32 @@ class SimulatorOPD(QtWidgets.QMainWindow, Ui_MainWindow):
         msgBox.setWindowTitle("Warning")
         msgBox.setStandardButtons(QtWidgets.QMessageBox.Ok)
         msgBox.exec()
+
+    def update_telescope_status(self):
+        while self._disconnect_flag:
+            time.sleep(.75)
+
+            self.telescope_status = self.telescope.get_position()
+            self.update_telescope_position()    
+
+    def connect_telescope(self):
+        self.telescope.connect()
+        self._disconnect_flag = True
+        
+        if self.thread_telescope == None:
+            self.thread_telescope = threading.Thread(name="TELESCOPE", target = self.update_telescope_status)
+            self.thread_telescope.daemon = True
+            self.thread_telescope.start()
+
+    def disconnect_telescope(self):
+        if self.telescope_status.get("connected"):
+            self._disconnect_flag = False
+            if self.thread_telescope != None:
+                self.thread_telescope.join()
+            self.thread_telescope = None
+        
+        self.telescope.disconnect()
+
 
     def closeEvent(self, event):
         """

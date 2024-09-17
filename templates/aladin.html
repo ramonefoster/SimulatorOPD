@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no">
+    <title>Aladin Lite - M31</title>
+</head>
+<body>
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js" charset="utf-8"></script>
+
+    <!-- Aladin Lite container at requested dimensions -->
+    <div id="aladin-lite-div" style="width:480;height:460px;"></div>
+    
+    <!-- Aladin Lite JS code -->
+    <script type="text/javascript" src="static/js/aladin.js" charset="utf-8"></script>
+    
+    <!-- Creation of Aladin Lite instance with initial parameters -->
+    <script type="text/javascript">
+        let aladin;
+        let tg = ""
+        setInterval(getJSONData, 1000);
+        // Initialize Aladin Lite when the library is ready
+        A.init.then(() => {
+            aladin = A.aladin('#aladin-lite-div', {survey: "P/DSS2/color", fov: 1.5, target: "trifid nebula"});
+        });
+
+        // Function to update the target and fov
+        function updateAladin(target, fov) {
+            console.log(tg, target)
+            aladin.gotoObject(target);
+            aladin.setFov(fov);
+        }
+
+        async function getJSONData() {
+            try {
+              const response = await fetch('http://127.0.0.1:5500/aladin/get_target');
+              data = await response.json();
+              updateAladin(data.target, data.fov)
+            } catch (error) {
+              console.error('Error:', error);
+            }
+          }
+        
+    </script>
+
+</body>
+</html>

@@ -1,6 +1,11 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
+import logging
+
+log = logging.getLogger('werkzeug')
+log.disabled = True
+
 FlaskApp = Flask(__name__)
 
 CORS(FlaskApp, resources={r"/api/*": {"origins": "http://127.0.0.1:5500"}})
