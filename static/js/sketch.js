@@ -29,6 +29,9 @@ function preload() {
   setInterval(getJSONData, 150)
 }
 
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL)
@@ -50,6 +53,7 @@ function mouseDragged() {
 
 function draw() {
   background(color_slider.value())
+  translate(-50, +50, 0)
   box(1);
 
   if (data) {  // Atualiza o valor apenas se ele realmente existir. Ação para que não apareça 'UNDEFINED' como resultado
