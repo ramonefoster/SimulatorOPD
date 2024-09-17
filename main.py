@@ -161,7 +161,7 @@ class SimulatorOPD(QtWidgets.QMainWindow, Ui_MainWindow):
         self.get_image(target=obj)
 
     def update(self):
-        if int(time.time() % 60) == 0:
+        if int(time.time() % 40) == 0:
             if self.random:
                 if self.telescope_status["slewing"]:
                     self.stop()
@@ -344,6 +344,7 @@ class SimulatorOPD(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def disconnect_telescope(self):
         if self.telescope_status.get("connected"):
+            self.stop()
             self._disconnect_flag = False
             if self.thread_telescope != None:
                 self.thread_telescope.join()
