@@ -1252,6 +1252,32 @@ border-radius: 15px;</string>
      </property>
     </widget>
    </widget>
+   <widget class="QPushButton" name="btnSetup">
+    <property name="geometry">
+     <rect>
+      <x>1320</x>
+      <y>690</y>
+      <width>35</width>
+      <height>35</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: lightgrey;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>static/img/config.png</normaloff>static/img/config.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>30</width>
+      <height>30</height>
+     </size>
+    </property>
+   </widget>
    <zorder>groupBox</zorder>
    <zorder>groupBox_10</zorder>
    <zorder>web160</zorder>
@@ -1269,6 +1295,7 @@ border-radius: 15px;</string>
    <zorder>label_20</zorder>
    <zorder>comboBox</zorder>
    <zorder>groupBox_2</zorder>
+   <zorder>btnSetup</zorder>
   </widget>
  </widget>
  <customwidgets>

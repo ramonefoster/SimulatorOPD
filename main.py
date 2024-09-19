@@ -5,6 +5,7 @@ import validators
 import threading
 import time
 import random
+import json
 
 from PyQt5 import QtWidgets, uic, QtTest
 from PyQt5.QtCore import QTimer, QUrl, pyqtSlot
@@ -18,6 +19,8 @@ from telescope import Telescope
 
 from utils.instances import verify_coord_format
 from utils.simbad import SimbadQ
+from utils.comm import Comm
+from screens.setup import SerialPortDialog
 
 from utils.dso import DSO
 from ipyaladin import Aladin
@@ -64,6 +67,10 @@ class SimulatorOPD(QtWidgets.QMainWindow, Ui_MainWindow):
         self.WebSimbad.loadProgress.connect(self.loadProgressHandler)
         self.WebSimbad.loadFinished.connect(self.loadFinishedHandler)
 
+        self.btnSetup.clicked.connect(self.setup)
+        self.comm = Comm()
+        self.com_port = None
+
         self.random = False
         self.dsos = DSO
 
@@ -80,7 +87,44 @@ class SimulatorOPD(QtWidgets.QMainWindow, Ui_MainWindow):
 
         url = QUrl(f'http://127.0.0.1:5500/aladin')
         self.WebSimbad.load(url)
+            
+    def setup(self):
+        # Open the dialog
+        dialog = SerialPortDialog()
+        dialog.port_selected.connect(self.handle_port_selection)
+        dialog.exec_()
     
+    def handle_port_selection(self, port):
+        # Slot that updates the label with the selected port
+        self.com_port = port
+        print(f"Port selected: {port}")
+        self.connect_comm(port)
+
+    def connect_comm(self, port):
+        if "COM" in port:
+            try:
+                if self.comm.connected:
+                    self.comm.connected(False)
+                    time.sleep(1)
+                self.comm.com_port = port
+                self.comm.connect(True)
+                serial_thread = threading.Thread(target=self.start_comm)
+                serial_thread.daemon = True  # Set the thread as a daemon to stop it when the main thread exits
+                serial_thread.start()
+            except Exception as e:
+                print(e)
+        
+    def start_comm(self):
+        while self.comm.connected:
+            data = {
+                'ra': round(self.telescope_status["right ascension"],4),
+                'ha': round(self.telescope_status["hour angle"],4),
+                'dec': round(self.telescope_status["declination"],4),
+            } 
+            json_data = json.dumps(data)  # Convert the dictionary to a JSON string
+            self.comm.write(json_data)
+            time.sleep(.8)
+
     def start_random(self):  
         self.random = not self.random
 
@@ -252,8 +296,6 @@ class SimulatorOPD(QtWidgets.QMainWindow, Ui_MainWindow):
             'azimuth': self.telescope_status["azimuth"],
             'elevation': self.telescope_status["elevation"],
             'tracking': self.telescope_status["tracking"],
-            'dome_position': 0,
-            'slit_status': 0,
         }        
         url = f"http://127.0.0.1"
         if validators.url(url):
