@@ -86,6 +86,8 @@ class SimulatorOPD(QtWidgets.QMainWindow, Ui_MainWindow):
 
         url = QUrl(f'http://127.0.0.1:5500/aladin')
         self.WebSimbad.load(url)
+        time.sleep(2)
+        self.get_image()
             
     def setup(self):
         # Open the dialog

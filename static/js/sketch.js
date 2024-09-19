@@ -65,7 +65,7 @@ function draw() {
   // text('\nra_deg: ' + ra_deg() + '\ndec_deg: ' + dec_deg(), -260, 400)
   noFill()
 
-  scale(.05)
+  scale(.06)
   // normalMaterial()
   fill(45, 128, 217) // Atribui cor ao modelo
   stroke(1)

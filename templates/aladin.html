@@ -22,7 +22,7 @@
         setInterval(getJSONData, 1000);
         // Initialize Aladin Lite when the library is ready
         A.init.then(() => {
-            aladin = A.aladin('#aladin-lite-div', {survey: "P/DSS2/color", fov: 1.5, target: "trifid nebula"});
+            aladin = A.aladin('#aladin-lite-div', {showReticle: false, survey: "P/DSS2/color", fov: 1.5, target: "trifid nebula"});
         });
 
         // Function to update the target and fov
