@@ -23,7 +23,6 @@ from utils.comm import Comm
 from screens.setup import SerialPortDialog
 
 from utils.dso import DSO
-from ipyaladin import Aladin
 from server import DisplayFlask
 
 
