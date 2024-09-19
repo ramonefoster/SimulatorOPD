@@ -98,7 +98,7 @@ class SimulatorOPD(QtWidgets.QMainWindow, Ui_MainWindow):
     def handle_port_selection(self, port):
         # Slot that updates the label with the selected port
         self.com_port = port
-        print(f"Port selected: {port}")
+        self.txtCOM.setText(port)
         self.connect_comm(port)
 
     def connect_comm(self, port):

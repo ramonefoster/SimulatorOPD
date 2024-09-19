@@ -1143,29 +1143,6 @@ background-color: rgb(68, 68, 68);</string>
      <number>0</number>
     </property>
    </widget>
-   <widget class="QComboBox" name="comboBox">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>810</y>
-      <width>171</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgba(85, 170, 255, 0.7);</string>
-    </property>
-    <item>
-     <property name="text">
-      <string>Perkin-Elmer</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Boller &amp; Chivens</string>
-     </property>
-    </item>
-   </widget>
    <widget class="QGroupBox" name="groupBox_2">
     <property name="geometry">
      <rect>
@@ -1259,7 +1236,7 @@ border-radius: 15px;</string>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>850</y>
+      <y>810</y>
       <width>171</width>
       <height>35</height>
      </rect>
@@ -1287,6 +1264,86 @@ border-radius: 15px;</string>
      </size>
     </property>
    </widget>
+   <widget class="QGroupBox" name="groupBox_5">
+    <property name="geometry">
+     <rect>
+      <x>870</x>
+      <y>810</y>
+      <width>191</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgba(255, 255, 255, 0);</string>
+    </property>
+    <property name="title">
+     <string>Model</string>
+    </property>
+    <widget class="QComboBox" name="comboBox">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>171</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgba(85, 170, 255, 0.7);</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>Perkin-Elmer</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Boller &amp; Chivens</string>
+      </property>
+     </item>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="txtCOM">
+    <property name="geometry">
+     <rect>
+      <x>25</x>
+      <y>855</y>
+      <width>141</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>COM3</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
    <zorder>groupBox</zorder>
    <zorder>groupBox_10</zorder>
    <zorder>web160</zorder>
@@ -1302,9 +1359,10 @@ border-radius: 15px;</string>
    <zorder>groupBox_4</zorder>
    <zorder>progressBar</zorder>
    <zorder>label_20</zorder>
-   <zorder>comboBox</zorder>
    <zorder>groupBox_2</zorder>
    <zorder>btnSetup</zorder>
+   <zorder>groupBox_5</zorder>
+   <zorder>txtCOM</zorder>
   </widget>
  </widget>
  <customwidgets>
