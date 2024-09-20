@@ -144,9 +144,6 @@ void loop() {
 
     lcd.setCursor(3, 1);
     lcd.print(hours_to_hms(ra));
-    // Serial.print("HA: ");
-    // Serial.println(ha);
-    // Serial.print("Dec: ");
-    // Serial.println(dec);
+
   }
 }
