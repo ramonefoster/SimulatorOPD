@@ -21,9 +21,9 @@ async function getJSONData() {
 
 
 function preload() {
-  base = loadModel("static/assets/Pilar_PE160.obj", false)
-  eixo = loadModel("static/assets/Eixo_PE160.obj", false)
-  tubo = loadModel("static/assets/Tubo_PE160.obj", false)
+  base = loadModel("static/assets/pe160/Pilar_PE160.obj", false)
+  eixo = loadModel("static/assets/pe160/Eixo_PE160.obj", false)
+  tubo = loadModel("static/assets/pe160/Tubo_PE160.obj", false)
   inconsolata = loadFont('static/assets/inconsolata.otf')
   // data = loadJSON('static/assets/data.json')
   setInterval(getJSONData, 150)

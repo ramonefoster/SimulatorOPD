@@ -142,8 +142,12 @@ class SimulatorOPD(QtWidgets.QMainWindow, Ui_MainWindow):
         """load outlet page"""
         if self.comboBox.currentIndex() == 0:
             url = QUrl("http://127.0.0.1:5500/")
-        else:
+        elif self.comboBox.currentIndex() == 1:
             url = QUrl("http://127.0.0.1:5500/iag")
+        elif self.comboBox.currentIndex() == 2:
+            url = QUrl("http://127.0.0.1:5500/asa80")
+        elif self.comboBox.currentIndex() == 3:
+            url = QUrl("http://127.0.0.1:5500/robo40")
 
         if url.isValid():
             try:

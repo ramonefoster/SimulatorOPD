@@ -1316,6 +1316,16 @@ background-color: rgba(255, 255, 255, 0);</string>
        <string>Boller &amp; Chivens</string>
       </property>
      </item>
+     <item>
+      <property name="text">
+       <string>ASA80</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>ROBO40</string>
+      </property>
+     </item>
     </widget>
    </widget>
    <widget class="QLabel" name="txtCOM">

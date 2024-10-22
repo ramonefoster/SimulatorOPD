@@ -17,6 +17,14 @@ def home():
 def iag():
     return render_template('iag.html')
 
+@DisplayFlask.route('/asa80')
+def asa80():
+    return render_template('asa80.html')
+
+@DisplayFlask.route('/robo40')
+def robo40():
+    return render_template('robo40.html')
+
 @DisplayFlask.route('/aladin')
 def set_aladin():
     return render_template('aladin.html')
