@@ -148,6 +148,8 @@ class SimulatorOPD(QtWidgets.QMainWindow, Ui_MainWindow):
             url = QUrl("http://127.0.0.1:5500/asa80")
         elif self.comboBox.currentIndex() == 3:
             url = QUrl("http://127.0.0.1:5500/robo40")
+        elif self.comboBox.currentIndex() == 4:
+            url = QUrl("http://127.0.0.1:5500/zeiss")
 
         if url.isValid():
             try:

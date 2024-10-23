@@ -25,6 +25,10 @@ def asa80():
 def robo40():
     return render_template('robo40.html')
 
+@DisplayFlask.route('/zeiss')
+def zeiss():
+    return render_template('zeiss.html')
+
 @DisplayFlask.route('/aladin')
 def set_aladin():
     return render_template('aladin.html')
