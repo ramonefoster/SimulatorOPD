@@ -10,3 +10,5 @@ pyserial==3.5
 pywin32==306
 requests==2.32.2
 validators==0.20.0
+matplotlib
+astroplan

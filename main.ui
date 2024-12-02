@@ -855,7 +855,7 @@ color: black;</string>
    <widget class="QPushButton" name="btnSouth">
     <property name="geometry">
      <rect>
-      <x>1200</x>
+      <x>1280</x>
       <y>820</y>
       <width>50</width>
       <height>50</height>
@@ -882,7 +882,7 @@ color: black;</string>
    <widget class="QLabel" name="label_18">
     <property name="geometry">
      <rect>
-      <x>1200</x>
+      <x>1280</x>
       <y>770</y>
       <width>50</width>
       <height>50</height>
@@ -904,7 +904,7 @@ color: black;</string>
    <widget class="QPushButton" name="btnWest">
     <property name="geometry">
      <rect>
-      <x>1150</x>
+      <x>1230</x>
       <y>770</y>
       <width>50</width>
       <height>50</height>
@@ -931,7 +931,7 @@ color: black;</string>
    <widget class="QPushButton" name="btnEast">
     <property name="geometry">
      <rect>
-      <x>1250</x>
+      <x>1330</x>
       <y>770</y>
       <width>50</width>
       <height>50</height>
@@ -958,7 +958,7 @@ color: black;</string>
    <widget class="QPushButton" name="btnNorth">
     <property name="geometry">
      <rect>
-      <x>1200</x>
+      <x>1280</x>
       <y>720</y>
       <width>50</width>
       <height>50</height>
@@ -1359,6 +1359,29 @@ background-color: rgba(255, 255, 255, 0);</string>
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
+   <widget class="QCheckBox" name="checkCCD">
+    <property name="geometry">
+     <rect>
+      <x>1100</x>
+      <y>710</y>
+      <width>161</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>Simulate CCD</string>
+    </property>
+   </widget>
    <zorder>groupBox</zorder>
    <zorder>groupBox_10</zorder>
    <zorder>web160</zorder>
@@ -1378,6 +1401,7 @@ background-color: rgba(255, 255, 255, 0);</string>
    <zorder>btnSetup</zorder>
    <zorder>groupBox_5</zorder>
    <zorder>txtCOM</zorder>
+   <zorder>checkCCD</zorder>
   </widget>
  </widget>
  <customwidgets>

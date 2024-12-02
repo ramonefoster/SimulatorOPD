@@ -7,10 +7,14 @@ import time
 import random
 import json
 
+import io
+from PIL import Image
+
 from PyQt5 import QtWidgets, uic, QtTest
 from PyQt5.QtCore import QTimer, QUrl, pyqtSlot
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtCore import QByteArray, QBuffer, QIODevice
 
 from utils.server import FlaskApp
 from utils.conversion import Convertion
@@ -24,7 +28,7 @@ from screens.setup import SerialPortDialog
 
 from utils.dso import DSO
 from server import DisplayFlask
-
+from scripts import skyview
 
 Ui_MainWindow, QtBaseClass = uic.loadUiType("main.ui")
 
@@ -271,10 +275,41 @@ class SimulatorOPD(QtWidgets.QMainWindow, Ui_MainWindow):
         except Exception as e: 
             print("SERVER OFF: ", e)
     
+    def figure_to_image(self, fig):
+        buf = io.BytesIO()
+        fig.savefig(buf, format='png')
+        buf.seek(0)
+        img = Image.open(buf)
+        img = img.convert("RGBA")
+        data = img.tobytes("raw", "RGBA")
+        qimage = QImage(data, img.size[0], img.size[1], QImage.Format_RGBA8888)
+        return qimage
+    
+    def image_to_base64(self, qimage):
+        """Convert QImage to base64 encoded string."""
+        byte_array = QByteArray()
+        buffer = QBuffer(byte_array)
+        buffer.open(QIODevice.WriteOnly)
+        qimage.save(buffer, "PNG")  # Save image as PNG in byte array
+        return byte_array.toBase64().data().decode()
+    
     def get_image(self, ra=None, dec=None, target=None):
         if not ra or not dec:
             ra = self.telescope_status["ra"]
             dec = self.telescope_status["dec"]
+
+        if self.checkCCD.isChecked():
+            fig = skyview.plot_skyview(ra, dec, 30, display=True)
+            # image = self.figure_to_image(fig)
+            # html = f"""
+            #     <html>
+            #         <body>
+            #             <img src="data:image/png;base64,{self.image_to_base64(image)}" />
+            #         </body>
+            #     </html>
+            #     """
+            # self.WebSimbad.setHtml(html)
+            # return
 
         if self.telescope_status.get("connected") and self.telescope_status:
             try:
